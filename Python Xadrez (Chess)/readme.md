@@ -53,6 +53,12 @@ Jogada 01
 Jogada 02
 
 
+O código regista meticulosamente o local de origem da peça, cada passo que ela dá durante o seu turno e, se for o caso, a coordenada exata onde ela é capturada e retirada da partida. Eu também adicionei instruções específicas para lidar automaticamente com regras complexas de movimentação dupla ou especial, como o roque e a captura na passagem, garantindo que nenhuma alteração de posição escape ao registo.
+
+O propósito de eu compilar e armazenar todas essas rotas transcende a simples curiosidade ou a visualização estética. Eu projetei esta coleta sistemática de coordenadas de movimentação com o objetivo estrito de fornecer bases sólidas para a ciência de dados e para análises estatísticas complexas.
+
+Com a exportação estruturada destes rastros, eu criei uma base viável para que investigadores e analistas possam aplicar algoritmos capazes de identificar padrões de mobilidade, calcular mapas de calor com as áreas de maior densidade de conflito no tabuleiro, avaliar a eficiência posicional de diferentes aberturas e mapear estatisticamente a probabilidade de sobrevivência ou o raio de ação médio de cada classe de peça ao longo de múltiplas partidas.
+
 Abaixo destaco o fragmento central da lógica de rastreamento que implementei:
 
 ```python
