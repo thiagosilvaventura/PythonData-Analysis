@@ -6,9 +6,13 @@ O software foi programado em Python e eu utilizei duas bibliotecas principais pa
 
 ## Estrutura da Interface Gráfica e Controles
 
+<img width="1036" height="709" alt="image" src="https://github.com/user-attachments/assets/ed8988f7-a0b9-49e2-b9ba-950fcba5acaf" />
+Interface inicial da aplicação
+
+
 Eu concebi a interface dividindo o ecrã em duas secções principais. À esquerda, renderizo o tabuleiro em formato tradicional. À direita, estruturei um menu de controlo numa paleta de cores escuras para concentrar os comandos de operação e análise.
 
-No painel de controlo, eu implementei os seguintes botões e funções:
+No painel de controle, eu implementei os seguintes botões e funções:
 
 * **Modo**: Permite alternar o controlo dos lados da partida. Eu configurei três estados possíveis: controlo exclusivo das peças brancas contra o computador, controlo exclusivo das pretas contra o computador, e o modo onde ambos os lados são controlados pelo utilizador no mesmo terminal. As respostas do computador são geradas por meio de escolhas pseudoaleatórias entre os movimentos legais disponíveis.
 * **Desfazer Jogada**: Reverte o último movimento no tabuleiro. Se o utilizador estiver a jogar contra o computador, eu programei este botão para remover duas jogadas da pilha, garantindo que o turno retorne ao jogador humano.
