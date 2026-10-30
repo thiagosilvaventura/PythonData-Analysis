@@ -76,6 +76,9 @@ class PieceTracker:
                 rid = self.sq_to_id.pop(r_from)
                 self.pieces[rid]['path'].append(r_to)
                 self.sq_to_id[r_to] = rid
+<img width="1036" height="713" alt="image" src="https://github.com/user-attachments/assets/d665838e-842b-4acc-be84-64156631664f" />
+
+                
 
         # Move a peça principal
         if from_sq in self.sq_to_id:
