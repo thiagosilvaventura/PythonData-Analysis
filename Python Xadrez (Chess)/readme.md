@@ -33,6 +33,12 @@ A biblioteca `python-chess` não rastreia o ciclo de vida individual das peças;
 
 Para alcançar isso, eu utilizo dois dicionários. O primeiro armazena as instâncias de cada peça acompanhadas dos seus respetivos caminhos e locais de captura. O segundo atua como um ponteiro iterativo que mapeia a casa atual do tabuleiro para o identificador único da peça que a ocupa.
 
+
+<img width="640" height="640" alt="image" src="https://github.com/user-attachments/assets/84f0a870-a6be-4f0e-8a57-4ff41f212e99" />
+<img width="640" height="640" alt="image" src="https://github.com/user-attachments/assets/523e6b6d-6c15-46ea-aa9b-45e82653eae7" />
+Exemplo do export dos movimentos das jogadas
+
+
 Abaixo destaco o fragmento central da lógica de rastreamento que implementei:
 
 ```python
