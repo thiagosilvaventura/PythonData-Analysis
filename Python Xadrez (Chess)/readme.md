@@ -20,6 +20,13 @@ No painel de controle, eu implementei os seguintes botões e funções:
 * **Exportar Rastros (JSON/PNG)**: Aciona o algoritmo de varredura e reconstrução da partida, gerando os ficheiros de saída com os dados mapeados.
 * **Filtros de Exportação**: Um conjunto de caixas de seleção que eu incluí para refinar os dados exportados. É possível selecionar a cor das peças (Brancas ou Pretas) e o tipo de peça (Peões, Cavalos, Bispos, Torres, Rainhas e Reis).
 
+
+
+<img width="1036" height="713" alt="image" src="https://github.com/user-attachments/assets/fd16bb83-6ff8-4f69-bcad-7f8c13cdde8d" />
+As casas disponiveis para cada tipo de peça foram herdadas nas regras da biblioteca utilizada
+
+
+
 ## Metodologia de Rastreamento de Peças
 
 A biblioteca `python-chess` não rastreia o ciclo de vida individual das peças; ela foca apenas no estado global do tabuleiro num dado turno. Para resolver esse problema analítico, eu elaborei a classe `PieceTracker`. O objetivo desta classe é recriar a partida internamente, passo a passo, registrando a trajetória (caminho) de cada unidade específica.
@@ -76,7 +83,6 @@ class PieceTracker:
                 rid = self.sq_to_id.pop(r_from)
                 self.pieces[rid]['path'].append(r_to)
                 self.sq_to_id[r_to] = rid
-<img width="1036" height="713" alt="image" src="https://github.com/user-attachments/assets/d665838e-842b-4acc-be84-64156631664f" />
 
                 
 
