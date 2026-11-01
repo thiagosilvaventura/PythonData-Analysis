@@ -4,12 +4,14 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Simulador de Vida - Evolução e Ecossistema</title>
-</head>
+  </head>
 
 <body>
 
 <h1>🌱 Simulador de Vida — Evolução e Ecossistema</h1>
+
+<img width="992" height="728" alt="image" src="https://github.com/user-attachments/assets/3e2486ca-05b6-44e3-9e2f-52d1e6f10a41" />
+
 
 <p>
     Neste projeto, desenvolvo uma simulação computacional de um ecossistema
@@ -746,9 +748,17 @@ pygame.display.flip()</code></pre>
     futuros envolvendo aprendizado de máquina, algoritmos
     evolutivos mais elaborados, análise estatística e
     modelagem de ecossistemas com maior complexidade.
+
+
+   
+
 </p>
 <p align="center">
     🌿 <strong>Simulação, observação e experimentação computacional.</strong>
+
+
+
+
 </p>
 
 </body>
