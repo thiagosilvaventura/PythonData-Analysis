@@ -1,5 +1,7 @@
 # Simulador de Xadrez com Mapeamento de Trajetórias de Peças
 
+<img width="1458" height="1002" alt="image" src="https://github.com/user-attachments/assets/553e010d-400b-4533-8c78-b11bcaf3fbdd" />
+
 Desenvolvi este simulador de xadrez em Python para registrar a trajetória de cada peça durante uma partida e exportar, ao final, tabelas e imagens que possam ser usadas em análises espaciais e estatísticas. Usei o `pygame` para a interface gráfica e o `python-chess` para o estado do tabuleiro e a validação das regras.
 
 O `python-chess` guarda apenas a posição atual, sem identificar cada peça ao longo dos lances. Para resolver isso, escrevi a classe `PieceTracker`, que refaz a partida lance a lance e associa cada movimento, captura e promoção à peça que o realizou. Na primeira versão eu exportava somente o caminho de cada peça e a casa onde ela foi capturada. Na versão atual também exporto métricas por lance, por peça e por partida, mapas por casa, arquivos CSV, JSON e PGN, e incluí um modo sem interface para rodar várias partidas e um modo de autojogo aleatório que não repete partidas.
