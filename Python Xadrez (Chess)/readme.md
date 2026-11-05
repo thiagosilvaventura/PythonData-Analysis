@@ -1,6 +1,13 @@
 # Simulador de Xadrez com Mapeamento de Trajetórias de Peças
 
+
+
+
 <img width="1458" height="1002" alt="image" src="https://github.com/user-attachments/assets/553e010d-400b-4533-8c78-b11bcaf3fbdd" />
+<p align="center">
+  <br>
+  <em>Figura 1. Interface visual.</em>
+</p>
 
 Desenvolvi este simulador de xadrez em Python para registrar a trajetória de cada peça durante uma partida e exportar, ao final, tabelas e imagens que possam ser usadas em análises espaciais e estatísticas. Usei o `pygame` para a interface gráfica e o `python-chess` para o estado do tabuleiro e a validação das regras.
 
@@ -108,13 +115,19 @@ Com as trajetórias reconstruídas, a função `analyze_game` percorre a partida
 ## 6. Dados exportados
 
 <img width="640" height="700" alt="heat_captures" src="https://github.com/user-attachments/assets/4dee1cc1-0c5e-4729-8b00-46aa37aa3cda" />
-               Heat Captures
+<p align="center">
+  <br>
+  <em>Figura 2. Mapa de capturas - heat captures.</em>
+</p>
 
 
 
 
 <img width="640" height="700" alt="heat_destinations" src="https://github.com/user-attachments/assets/29504acb-10f6-40fd-b836-1177fc9b4d96" />
-              Heat Destinations
+             <p align="center">
+  <br>
+  <em>Figura 3. Mapa de capturas - heat destinations.</em>
+</p>
 
 Cada exportação manual cria a pasta `exports/partidas/<id>_<N>plies/`. As partidas finalizadas também são acrescentadas aos arquivos acumulados em `exports/dataset/`.
 
@@ -199,3 +212,9 @@ O material capturado pelas pretas inclui a dama obtida por promoção (9 pontos)
 B = brancas, P = pretas. A sobrevivência é a fração das peças do tipo que não foi capturada até o fim da partida.
 
 
+
+<img width="640" height="684" alt="trace" src="https://github.com/user-attachments/assets/f4885331-9564-4bfd-bb8d-e286084fa910" />
+<p align="center">
+  <br>
+  <em>Figura 4. Mapa de traços.</em>
+</p>
