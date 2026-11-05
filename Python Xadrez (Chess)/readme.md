@@ -59,6 +59,16 @@ O propósito de eu compilar e armazenar todas essas rotas transcende a simples c
 
 Com a exportação estruturada destes rastros, eu criei uma base viável para que investigadores e analistas possam aplicar algoritmos capazes de identificar padrões de mobilidade, calcular mapas de calor com as áreas de maior densidade de conflito no tabuleiro, avaliar a eficiência posicional de diferentes aberturas e mapear estatisticamente a probabilidade de sobrevivência ou o raio de ação médio de cada classe de peça ao longo de múltiplas partidas.
 
+heat_captures
+
+<img width="640" height="700" alt="heat_captures" src="https://github.com/user-attachments/assets/7a940c74-4dff-44f2-a7c9-d53c702c14ca" />
+
+Control Black (Heat)
+
+<img width="640" height="700" alt="heat_control_black" src="https://github.com/user-attachments/assets/34cc9ac2-cc52-486c-be00-e4b88dbdc30d" />
+
+
+
 Abaixo destaco o fragmento central da lógica de rastreamento que implementei:
 
 ```python
