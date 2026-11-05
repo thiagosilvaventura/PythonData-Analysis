@@ -107,6 +107,15 @@ Com as trajetórias reconstruídas, a função `analyze_game` percorre a partida
 
 ## 6. Dados exportados
 
+<img width="640" height="700" alt="heat_captures" src="https://github.com/user-attachments/assets/4dee1cc1-0c5e-4729-8b00-46aa37aa3cda" />
+               Heat Captures
+
+
+
+
+<img width="640" height="700" alt="heat_destinations" src="https://github.com/user-attachments/assets/29504acb-10f6-40fd-b836-1177fc9b4d96" />
+              Heat Destinations
+
 Cada exportação manual cria a pasta `exports/partidas/<id>_<N>plies/`. As partidas finalizadas também são acrescentadas aos arquivos acumulados em `exports/dataset/`.
 
 ```
