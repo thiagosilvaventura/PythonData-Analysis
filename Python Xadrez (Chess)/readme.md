@@ -10,6 +10,8 @@ O software foi programado em Python e eu utilizei duas bibliotecas principais pa
 Interface inicial da aplicação
 
 
+
+
 Eu concebi a interface dividindo o ecrã em duas secções principais. À esquerda, renderizo o tabuleiro em formato tradicional. À direita, estruturei um menu de controlo numa paleta de cores escuras para concentrar os comandos de operação e análise.
 
 No painel de controle, eu implementei os seguintes botões e funções:
@@ -67,6 +69,8 @@ Control Black (Heat)
 
 <img width="640" height="700" alt="heat_control_black" src="https://github.com/user-attachments/assets/34cc9ac2-cc52-486c-be00-e4b88dbdc30d" />
 
+Dados de partidas:
+<img width="900" height="560" alt="material" src="https://github.com/user-attachments/assets/59b243e2-d27b-4f06-9ae8-985443685d52" />
 
 
 Abaixo destaco o fragmento central da lógica de rastreamento que implementei:
