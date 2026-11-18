@@ -1,164 +1,194 @@
-<!DOCTYPE html>
-<html lang="pt-BR">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Regex Translator - README</title>
-    <style>
-        :root {
-            --bg-color: #282a36;
-            --card-bg: #1e1f29;
-            --text-color: #f8f8f2;
-            --comment-color: #6272a4;
-            --green: #50fa7b;
-            --purple: #bd93f9;
-            --cyan: #8be9fd;
-            --pink: #ff79c6;
-            --border-color: #44475a;
-        }
+# Regex Translator
 
-        body {
-            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
-            background-color: var(--bg-color);
-            color: var(--text-color);
-            line-height: 1.6;
-            margin: 0;
-            padding: 40px 20px;
-            display: flex;
-            justify-content: center;
-        }
+**Tradutor bidirecional entre Linguagem Natural e Expressões Regulares (Regex)**
 
-        .container {
-            max-width: 850px;
-            width: 100%;
-            background-color: var(--card-bg);
-            padding: 40px;
-            border-radius: 12px;
-            border: 1px solid var(--border-color);
-            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
-        }
+O Regex Translator é uma aplicação desktop desenvolvida em Python que permite converter descrições simples em linguagem natural para expressões regulares e interpretar padrões Regex em descrições textuais em português.
 
-        h1 {
-            color: var(--green);
-            font-size: 2.2em;
-            margin-top: 0;
-            border-bottom: 2px solid var(--border-color);
-            padding-bottom: 10px;
-            letter-spacing: 1px;
-        }
+Desenvolvi o projeto utilizando **PySide6** para a interface gráfica e o módulo nativo `re` para o processamento das expressões. A aplicação funciona integralmente offline, sem depender de APIs ou serviços externos.
 
-        h2 {
-            color: var(--purple);
-            font-size: 1.5em;
-            margin-top: 30px;
-            border-bottom: 1px solid var(--border-color);
-            padding-bottom: 6px;
-        }
+---
 
-        h3 {
-            color: var(--cyan);
-            font-size: 1.15em;
-            margin-top: 20px;
-        }
+## 🖥️ Interface
 
-        p {
-            margin-bottom: 16px;
-        }
+A aplicação possui uma interface dividida em dois painéis: entrada e saída. Essa organização permite visualizar o texto original e sua tradução simultaneamente.
 
-        ul, ol {
-            padding-left: 24px;
-            margin-bottom: 20px;
-        }
+- **Painel de entrada:** recebe expressões regulares ou descrições em linguagem natural.
+- **Painel de saída:** apresenta o resultado da conversão.
+- **Detecção automática:** identifica heurísticamente se o conteúdo informado corresponde a Regex ou linguagem natural.
+- **Inversão de tradução:** permite alternar os idiomas de origem e destino.
+- **Realce de sintaxe:** aplica cores diferentes aos principais elementos das expressões regulares.
 
-        li {
-            margin-bottom: 10px;
-        }
+---
 
-        strong {
-            color: var(--pink);
-        }
+## ⚙️ Tecnologias utilizadas
 
-        code {
-            font-family: "Fira Code", "JetBrains Mono", Consolas, monospace;
-            background-color: var(--bg-color);
-            color: var(--cyan);
-            padding: 2px 6px;
-            border-radius: 4px;
-            font-size: 0.9em;
-        }
+| Tecnologia | Aplicação |
+|---|---|
+| Python | Linguagem principal |
+| PySide6 | Interface gráfica desktop |
+| `re` | Processamento e substituição de padrões |
+| `QSyntaxHighlighter` | Realce de sintaxe |
+| `QThreadPool` | Gerenciamento de tarefas em segundo plano |
+| `QTimer` | Controle do intervalo de tradução automática |
+| `time` | Medição do tempo de processamento |
 
-        pre {
-            background-color: var(--bg-color);
-            padding: 16px;
-            border-radius: 8px;
-            border: 1px solid var(--border-color);
-            overflow-x: auto;
-        }
+**Dependências:** apenas PySide6. Os demais módulos utilizados fazem parte da biblioteca padrão do Python.
 
-        pre code {
-            background-color: transparent;
-            padding: 0;
-            color: var(--green);
-            font-size: 0.95em;
-        }
+---
 
-        hr {
-            border: 0;
-            height: 1px;
-            background: var(--border-color);
-            margin: 30px 0;
-        }
-    </style>
-</head>
-<body>
+## 🔄 Funcionamento do tradutor
 
-<div class="container">
-    <h1>Regex Translator</h1>
-    <p>Um utilitário de tradução bidirecional entre expressões regulares (Regex) e linguagem natural (Português), desenvolvido em Python utilizando a biblioteca PySide6. A ferramenta opera 100% offline, conta com detecção automática de formato, realce de sintaxe em tempo real e processamento assíncrono em segundo plano para manter a interface responsiva.</p>
+Implementei dois mecanismos principais de conversão, organizados em uma classe chamada `RegexEngine`.
 
-    <hr>
+### 1. Regex para Linguagem Natural
 
-    <h2>🛠️ Tecnologias e Bibliotecas Utilizadas</h2>
-    <ul>
-        <li><strong>Python 3.8+:</strong> Linguagem principal para a lógica de tradução e manipulação de strings.</li>
-        <li><strong>PySide6 (Qt para Python):</strong> Framework gráfico utilizado para a construção da interface de usuário, gerenciamento de eventos, estilização e manipulação do DOM de texto.</li>
-        <li><strong>QThreadPool &amp; QRunnable:</strong> Utilizados para isolar o motor de tradução da thread principal da interface gráfica (<em>UI Thread</em>), evitando travamentos durante o processamento de blocos grandes de texto.</li>
-    </ul>
+O mecanismo percorre um dicionário de correspondências entre elementos de Regex e suas respectivas descrições em português.
 
-    <hr>
+| Expressão | Interpretação |
+|---|---|
+| `^` | Início da linha |
+| `$` | Fim da linha |
+| `\d` | Um dígito numérico |
+| `\w` | Um caractere alfanumérico |
+| `\s` | Um espaço em branco |
+| `.*` | Qualquer texto (opcional) |
+| `.` | Qualquer caractere |
+| `[a-z]` | Uma letra minúscula |
+| `[A-Z]` | Uma letra maiúscula |
+| `[0-9]` | Um número de 0 a 9 |
+| `+` | Uma ou mais vezes |
+| `*` | Zero ou mais vezes |
+| `?` | Opcionalmente |
 
-    <h2>✨ Principais Funcionalidades</h2>
-    <ul>
-        <li><strong>Tradução Bidirecional:</strong> Conversão fluida de expressões regulares para descrições textuais em português e vice-versa.</li>
-        <li><strong>Detecção Automática:</strong> Identifica de forma inteligente se o texto inserido corresponde a uma sintaxe de Regex ou a uma instrução em linguagem natural.</li>
-        <li><strong>Realce de Sintaxe (<em>Syntax Highlighting</em>):</strong> Destaca visualmente âncoras, metacaracteres, classes, quantificadores e grupos utilizando uma paleta inspirada no tema Dracula.</li>
-        <li><strong>Processamento Assíncrono com Debounce:</strong> As traduções são acionadas por um temporizador de atraso (<em>timer single-shot</em> de 400ms) executado em segundo plano, garantindo digitação fluida.</li>
-        <li><strong>Interface Adaptada:</strong> Janela dividida (<em>splitter</em>) com suporte a atalhos de teclado (como <code>Ctrl + L</code> para limpeza rápida) e inversão dinâmica de direções de tradução.</li>
-    </ul>
+A conversão utiliza substituições sucessivas por meio de `re.sub()`.
 
-    <hr>
+### 2. Linguagem Natural para Regex
 
-    <h2>📂 Estrutura do Código</h2>
-    <p>O script está dividido em quatro módulos lógicos principais:</p>
-    <ol>
-        <li><strong>Configurações e Constantes:</strong> Definição do nome da aplicação, rótulos de idioma e dicionários de mapeamento heurístico (<code>REGEX_TO_NATURAL</code> e <code>NATURAL_TO_REGEX</code>).</li>
-        <li><strong>Motor de Tradução (<code>RegexEngine</code>):</strong> Responsável por analisar o texto de entrada, aplicar as regras de substituição via expressões regulares nativas e calcular o tempo de execução em milissegundos.</li>
-        <li><strong>Componentes de Interface:</strong> Fábrica de fontes monoespaçadas (suportando <em>Fira Code</em>, <em>JetBrains Mono</em> e <em>Consolas</em>), o marcador de sintaxe (<code>RegexSyntaxHighlighter</code>) e o editor de texto otimizado (<code>EditorArea</code>).</li>
-        <li><strong>Execução em Background e Janela Principal:</strong> Implementação do padrão <code>QRunnable</code>/<code>QSignals</code> para processamento paralelo e estruturação da janela principal (<code>RegexTranslatorApp</code>) com gerenciamento de layout e tema visual customizado.</li>
-    </ol>
+Implementei o processo inverso utilizando um segundo dicionário de expressões linguísticas e seus respectivos padrões Regex.
 
-    <hr>
+| Descrição | Expressão |
+|---|---|
+| Início da linha | `^` |
+| Fim da linha | `$` |
+| Um dígito / número | `\d` |
+| Letra | `[a-zA-Z]` |
+| Alfanumérico | `\w` |
+| Espaço | `\s` |
+| Qualquer caractere | `.` |
+| Qualquer coisa / texto | `.*` |
+| Uma ou mais vezes | `+` |
+| Zero ou mais vezes | `*` |
+| Opcional / opcionalmente | `?` |
 
-    <h2>🚀 Como Executar</h2>
+O mecanismo converte as descrições reconhecidas, remove conectivos e espaços excedentes e organiza o resultado em uma expressão regular.
 
-    <h3>Pré-requisitos</h3>
-    <p>Certifique-se de ter o Python 3 instalado em seu ambiente. Instale a única dependência necessária executando o comando abaixo no terminal:</p>
-    <pre><code>pip install PySide6</code></pre>
+**Observação:** a tradução é baseada em correspondências heurísticas. Portanto, não representa um interpretador semântico completo de linguagem natural nem garante equivalência entre todos os padrões Regex e suas descrições.
 
-    <h3>Execução</h3>
-    <p>Com a dependência instalada, execute o script diretamente pelo terminal:</p>
-    <pre><code>python regex_translator.py</code></pre>
-</div>
+---
 
-</body>
-</html>
+## 🧠 Arquitetura do projeto
+
+Organizei o código em componentes com responsabilidades distintas:
+
+| Componente | Responsabilidade |
+|---|---|
+| `RegexEngine` | Detecta a linguagem e executa as conversões |
+| `TranslationResult` | Armazena o resultado, a origem detectada e o tempo de processamento |
+| `RegexSyntaxHighlighter` | Identifica e colore elementos da sintaxe Regex |
+| `EditorArea` | Configura os campos de edição e exibição |
+| `TaskSignals` | Gerencia os sinais de conclusão e erro |
+| `TranslationTask` | Executa o processamento em uma tarefa independente |
+| `RegexTranslatorApp` | Controla a interface gráfica e os eventos da aplicação |
+
+### Processamento em segundo plano
+
+Utilizei `QRunnable` e `QThreadPool` para executar as traduções em tarefas independentes, evitando concentrar o processamento diretamente no fluxo principal da interface.
+
+Também implementei um `QTimer` com intervalo de 400 milissegundos. Ele aguarda uma breve pausa na digitação antes de iniciar a tradução automática, reduzindo chamadas desnecessárias ao motor de processamento.
+
+### Detecção automática
+
+A identificação da linguagem utiliza uma análise de caracteres específicos.
+
+Quando o conteúdo apresenta símbolos como `^`, `$`, `\`, `{}`, `[]`, `|`, `+` ou `*`, o mecanismo classifica a entrada como Regex. Caso contrário, considera o conteúdo linguagem natural.
+
+---
+
+## 🎨 Realce de sintaxe
+
+Implementei um sistema de destaque visual utilizando `QSyntaxHighlighter`, com identificação de diferentes elementos das expressões regulares.
+
+| Elemento | Cor |
+|---|---|
+| Âncoras | Rosa |
+| Metacaracteres | Ciano |
+| Classes de caracteres | Amarelo |
+| Quantificadores | Verde |
+| Grupos | Roxo |
+
+A interface utiliza uma paleta baseada no tema Dracula, com fundo escuro e elementos contrastantes.
+
+---
+
+## 🚀 Instalação e execução
+
+### 1. Pré-requisitos
+
+- Python 3.9 ou superior.
+- pip.
+
+### 2. Instalação da dependência
+
+```bash
+pip install PySide6
+```
+
+### 3. Execução
+
+Salve o script como `regex_translator.py` e execute:
+
+```bash
+python regex_translator.py
+```
+
+A janela da aplicação será inicializada diretamente pelo Python.
+
+---
+
+## ⌨️ Atalhos e controles
+
+| Controle | Função |
+|---|---|
+| `Ctrl + L` | Limpar os campos |
+| ⇄ Inverter | Inverter os idiomas de origem e destino |
+| Limpar | Apagar entrada e resultado |
+| Auto-detectar | Identificar automaticamente o tipo de entrada |
+
+---
+
+## 📂 Estrutura do projeto
+
+```text
+Regex-Translator/
+│
+├── regex_translator.py
+└── README.md
+```
+
+---
+
+## 📌 Características técnicas
+
+- Conversão bidirecional entre Regex e linguagem natural.
+- Processamento local e funcionamento offline.
+- Detecção heurística automática da linguagem.
+- Tradução automática durante a digitação.
+- Processamento em segundo plano com `QThreadPool`.
+- Realce de sintaxe com `QSyntaxHighlighter`.
+- Suporte a múltiplas linhas.
+- Medição do tempo de execução em milissegundos.
+- Interface gráfica desenvolvida com PySide6.
+
+---
+
+**Desenvolvido em Python | PySide6 | Regex**
