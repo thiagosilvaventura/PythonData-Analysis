@@ -1,236 +1,156 @@
-# Operational Risk Assessment & Risk Heatmap
+## 📊 Results Dashboard
 
-## Project Overview
+<p align="center">
+  <img src="readme_assets/dashboard_overview.png" alt="Operational risk dashboard overview" width="100%">
+</p>
 
-I developed this project in Python to simulate an operational risk assessment process across multiple countries and business processes.
+<p align="center">
+  <img src="https://img.shields.io/badge/Risk%20records-245-1f2937?style=for-the-badge" alt="Risk records 245">
+  <img src="https://img.shields.io/badge/Avg.%20inherent-9.40-d97706?style=for-the-badge" alt="Average inherent risk 9.40">
+  <img src="https://img.shields.io/badge/Avg.%20residual-4.16-1d4ed8?style=for-the-badge" alt="Average residual risk 4.16">
+  <img src="https://img.shields.io/badge/Modeled%20reduction-55.8%25-16a34a?style=for-the-badge" alt="Modeled reduction 55.8 percent">
+</p>
+<p align="center">
+  <img src="https://img.shields.io/badge/High-7-f97316?style=for-the-badge" alt="High risks 7">
+  <img src="https://img.shields.io/badge/Critical-0-b91c1c?style=for-the-badge" alt="Critical risks 0">
+  <img src="https://img.shields.io/badge/KRI%20breaches-14-dc2626?style=for-the-badge" alt="KRI breaches 14">
+  <img src="https://img.shields.io/badge/Escalations-2-dc2626?style=for-the-badge" alt="Escalations 2">
+</p>
 
-The main objective was to structure risk information, evaluate the effectiveness of existing controls, calculate residual risk exposure, and apply consistent criteria to support risk prioritization.
+I organized the results in five chapters. Each one starts from the full portfolio and ends with the records that have the highest residual risk.
 
-I used synthetic data to represent operational scenarios involving incidents, control weaknesses, recurring issues, overdue actions, and Key Risk Indicators (KRIs). This allowed me to build and test the assessment logic without using confidential or company-specific information.
+---
 
-The project reflects concepts commonly used in Operational Risk Management, Internal Controls, Quality Assurance, and Continuous Improvement.
+### 🌎 Chapter 1 · Residual risk by country
 
-## Project Objectives
+Average residual risk ranges from 2.34 (Chile) to 5.73 (Mexico). All five countries are below the risk appetite of 8 used in this project. In the chart, the bars show the average after controls and the line shows the average before controls.
 
-I structured the project around the following objectives:
-
-- Assess inherent and residual risk levels using a consistent scoring methodology.
-- Compare risk exposure across countries and operational processes.
-- Evaluate control design and operating effectiveness.
-- Incorporate incidents, recurrence, overdue actions, and KRI breaches into the assessment.
-- Establish criteria for risk classification and escalation.
-- Translate assessment results into management recommendations based on predefined conditions.
-
-My intention was to represent how operational data can be organized and assessed to support risk monitoring, prioritization, and management decisions.
-
-## Data Structure and Simulation
-
-I used Python to generate a synthetic dataset representing operational risk records across five countries: Brazil, Mexico, Colombia, Chile, and Argentina.
-
-The simulation covers different operational processes and risk categories. Each record contains attributes used throughout the assessment, including:
-
-- Country and operational process.
-- Risk category and description.
-- Likelihood and impact scores.
-- Control design effectiveness.
-- Control operating effectiveness.
-- Incident frequency and recurrence.
-- Overdue corrective actions.
-- KRI status.
-
-I used **Pandas** to structure and manipulate the records, while **NumPy** supported numerical calculations and the generation of controlled variations in the simulated data.
-
-The use of synthetic data made it possible to define different operational scenarios and test how changes in risk factors affect the assessment.
-
-## Risk Assessment Methodology
-
-I applied a scoring model based on two main dimensions: likelihood and impact.
-
-### Inherent Risk
-
-Inherent risk represents the level of exposure before considering the effect of controls.
-
-I calculated it by multiplying the likelihood score by the impact score:
-
-`Inherent Risk = Likelihood × Impact`
-
-Both dimensions use a scale from 1 to 5, allowing each risk to receive a numerical score between 1 and 25.
-
-### Control Effectiveness
-
-I separated control effectiveness into two dimensions:
-
-- **Design Effectiveness:** evaluates whether the control is appropriately structured to address the identified risk.
-- **Operating Effectiveness:** evaluates whether the control is being consistently applied in practice.
-
-I assigned a weight of 40% to design effectiveness and 60% to operating effectiveness.
-
-`Control Effectiveness = (Design × 0.40) + (Operation × 0.60)`
-
-I used a higher weight for operating effectiveness because a well-designed control does not necessarily reduce exposure if it is not consistently performed.
-
-### Residual Risk
-
-Residual risk represents the remaining exposure after considering the estimated effect of controls.
-
-I calculated it using the inherent risk score and the control effectiveness percentage:
-
-`Residual Risk = Inherent Risk × (1 - Control Effectiveness / 100 × 0.80)`
-
-The 0.80 factor represents an adjustment applied within the simulation to avoid assuming that controls eliminate the entire identified exposure.
-
-This calculation allows me to compare the initial exposure with the estimated risk remaining after controls are considered.
-
-### Risk Classification
-
-I defined four classification levels based on the resulting risk score:
-
-| Risk Level | Score |
-|---|---:|
-| Critical | 15–25 |
-| High | 10–14 |
-| Moderate | 5–9 |
-| Low | Below 5 |
-
-These thresholds are parameters established for this project. They are illustrative and should not be interpreted as official COSO or ISO 31000 classification thresholds.
-
-## Incident and KRI Assessment
-
-I incorporated incident information into the assessment to represent how operational events can influence risk prioritization.
-
-The model considers incident frequency, recurring events, overdue corrective actions, and KRI threshold breaches.
-
-I defined a KRI breach in the simulation when the incident count exceeds three. This threshold is configurable and serves as an example of how an organization can establish monitoring criteria for operational indicators.
-
-I also included escalation conditions based on the combination of risk classification, KRI breaches, and overdue actions.
-
-This approach allows the assessment to consider not only the calculated risk score, but also operational signals that may require additional attention.
-
-## Automated Decision Criteria
-
-I used conditional logic in Python to associate assessment results with predefined management recommendations.
-
-The criteria consider:
-
-- Critical and high residual risk classifications.
-- Low operating effectiveness.
-- KRI threshold breaches.
-- Overdue corrective actions.
-- Recurring incidents.
-
-I chose this approach to connect numerical risk assessment with practical management criteria. Instead of treating each risk score as an isolated value, the model considers additional indicators that may influence the need for investigation, escalation, or corrective action.
-
-## Technology and Libraries
-
-| Technology | Purpose |
-|---|---|
-| Python | Main programming language and assessment logic |
-| Pandas | Data structuring, transformation, grouping, and aggregation |
-| NumPy | Numerical calculations and synthetic data generation |
-| Matplotlib | Chart construction and visual customization |
-| Seaborn | Risk matrix and heatmap visualization |
-| OpenPyXL | Excel workbook generation |
-
-I used Python as the central component because it allowed me to keep data generation, calculations, classification rules, and visualizations within the same workflow.
-
-Pandas and NumPy were selected to handle the tabular data and numerical operations. Matplotlib and Seaborn were used to represent risk scores and relationships between operational dimensions in a visual format.
-
-## Execution
-
-To install the required libraries:
-
-```bash
-pip install pandas numpy matplotlib seaborn openpyxl
+```mermaid
+xychart-beta
+    title "Average risk by country: residual (bars) and inherent (line)"
+    x-axis ["Mexico", "Argentina", "Colombia", "Brazil", "Chile"]
+    y-axis "Average risk score" 0 --> 14
+    bar [5.73, 4.55, 4.52, 3.65, 2.34]
+    line [12.73, 10.16, 10.20, 8.49, 5.43]
 ```
 
-To run the project:
+| Country | Avg. residual risk (bar scale 0–10) | Avg. inherent | High | KRI breaches | Records with overdue actions | Records with recurring incidents | Incidents (90 days) |
+|---|---|---:|---:|---:|---:|---:|---:|
+| 🇲🇽 Mexico | `███████████░░░░░░░░░` **5.73** | 12.73 | 4 | 5 | 29 | 11 | 90 |
+| 🇦🇷 Argentina | `█████████░░░░░░░░░░░` **4.55** | 10.16 | 2 | 5 | 32 | 14 | 78 |
+| 🇨🇴 Colombia | `█████████░░░░░░░░░░░` **4.52** | 10.20 | 1 | 4 | 32 | 13 | 83 |
+| 🇧🇷 Brazil | `███████░░░░░░░░░░░░░` **3.65** | 8.49 | 0 | 0 | 28 | 8 | 51 |
+| 🇨🇱 Chile | `█████░░░░░░░░░░░░░░░` **2.34** | 5.43 | 0 | 0 | 21 | 7 | 46 |
 
-```bash
-python risk_assessment_engine.py
+<p align="center"><img src="05_country_risk_comparison.png" alt="Average residual risk by country compared with the risk appetite" width="70%"></p>
+
+---
+
+### 🏭 Chapter 2 · Residual risk by process
+
+Third Party Management has the highest average residual risk (6.78) and the lowest average control effectiveness (65.9%). The highest country and process average is Mexico × Third Party Management (9.6), followed by Argentina × Third Party Management (8.1). These are the only two cells above 8.
+
+**Heatmap:** 🟩 below 3 · 🟨 3 to 5 · 🟧 5 to 8 · 🟥 8 or above
+
+| Country | ⚖️ | 🎧 | 💰 | 🔐 | ✅ | 💻 | 🤝 |
+|---|---:|---:|---:|---:|---:|---:|---:|
+| 🇲🇽 Mexico | 🟧 6.3 | 🟧 5.6 | 🟨 4.1 | 🟧 6.3 | 🟨 3.3 | 🟧 5.0 | 🟥 9.6 |
+| 🇦🇷 Argentina | 🟨 4.7 | 🟨 3.2 | 🟨 3.1 | 🟧 5.2 | 🟨 3.1 | 🟨 4.5 | 🟥 8.1 |
+| 🇨🇴 Colombia | 🟧 6.9 | 🟨 3.6 | 🟨 3.1 | 🟨 4.6 | 🟩 2.6 | 🟨 4.3 | 🟧 6.6 |
+| 🇧🇷 Brazil | 🟩 3.0 | 🟨 3.3 | 🟩 2.5 | 🟧 5.6 | 🟩 2.8 | 🟨 3.3 | 🟧 5.0 |
+| 🇨🇱 Chile | 🟩 2.5 | 🟩 2.1 | 🟩 1.5 | 🟩 2.1 | 🟩 1.2 | 🟩 2.5 | 🟨 4.6 |
+
+⚖️ Compliance · 🎧 Customer Operations · 💰 Financial Operations · 🔐 Information Security · ✅ Quality Assurance · 💻 Technology · 🤝 Third Party Management
+
+```mermaid
+xychart-beta
+    title "Average residual risk by process"
+    x-axis ["Third Party", "Info Security", "Compliance", "Technology", "Customer Ops", "Financial Ops", "Quality Assur."]
+    y-axis "Average residual risk" 0 --> 10
+    bar [6.78, 4.74, 4.65, 3.92, 3.55, 2.87, 2.58]
 ```
 
-## Methodological Considerations
+| Process | Avg. residual risk (bar scale 0–10) | Control effectiveness | Records with overdue actions |
+|---|---|---:|---:|
+| 🤝 Third Party Management | `██████████████░░░░░░` **6.78** | 65.9% | 20 |
+| 🔐 Information Security | `█████████░░░░░░░░░░░` **4.74** | 69.6% | 22 |
+| ⚖️ Compliance | `█████████░░░░░░░░░░░` **4.65** | 70.1% | 25 |
+| 💻 Technology | `████████░░░░░░░░░░░░` **3.92** | 71.7% | 20 |
+| 🎧 Customer Operations | `███████░░░░░░░░░░░░░` **3.55** | 72.7% | 21 |
+| 💰 Financial Operations | `██████░░░░░░░░░░░░░░` **2.87** | 72.3% | 16 |
+| ✅ Quality Assurance | `█████░░░░░░░░░░░░░░░` **2.58** | 71.7% | 18 |
 
-The dataset is entirely synthetic, and the scoring thresholds, weights, and escalation conditions are assumptions defined for this simulation.
+<p align="center"><img src="02_country_process_heatmap.png" alt="Heatmap of average residual risk by country and process" width="100%"></p>
 
-The model is intended to demonstrate the structure and application of an operational risk assessment methodology. Its calculations do not represent measured business performance or an official implementation of any regulatory framework.
+---
 
-I used this project to apply Python to concepts related to operational risk, internal controls, incident monitoring, KRI assessment, and risk-based decision-making.
+### 🎯 Chapter 3 · Inherent risk before controls
 
-## Output Files
+The most frequent combination is likelihood 2 and impact 3 (52 records), followed by likelihood 3 with impact 4 (31 records) and likelihood 3 with impact 3 (29 records). After controls, 170 records are Low, 68 are Moderate and 7 are High.
 
-When I run the script, it saves the following files:
+```mermaid
+pie showData
+    title Records by residual risk level
+    "Low" : 170
+    "Moderate" : 68
+    "High" : 7
+```
 
-| File | What it contains |
-|---|---|
-| `risk_register.csv` | The full list of 245 risk records with all scores, classifications, KRI status and escalation flag. |
-| `country_summary.xlsx` | Totals and averages for each country. |
-| `process_summary.xlsx` | Totals and averages for each process. |
-| `control_diagnostics.xlsx` | Count of records by type of control weakness. |
-| `executive_report.txt` | A short summary with the main numbers and management recommendations. |
-| `01_inherent_risk_matrix.png` | Likelihood vs impact matrix. |
-| `02_country_process_heatmap.png` | Average residual risk by country and process. |
-| `03_control_effectiveness.png` | Average control effectiveness by country and process. |
-| `04_risk_concentration.png` | Number of records per risk level in each country. |
-| `05_country_risk_comparison.png` | Average residual risk by country, compared to a risk appetite line of 8. |
+<p align="center"><img src="01_inherent_risk_matrix.png" alt="Inherent risk matrix of likelihood against impact" width="60%"></p>
 
-## Results
+---
 
-All numbers below come from the synthetic dataset, so they only show how the model behaves. They are not real business results.
+### 🛠️ Chapter 4 · Control effectiveness
 
-### Overall
+58 records have an operating control weakness (average operating effectiveness 52.9%), 25 have a design weakness, 15 have a gap between design and operation, and 147 show no major gap.
 
-- I assessed 245 risk records: 49 per country, 35 per process.
-- Average inherent risk was 9.40 and average residual risk was 4.16. The model estimates that controls reduce risk by 55.78%.
-- No record was classified as Critical. 7 records were classified as High.
-- 14 records breached the KRI threshold, and 2 required escalation.
-- 348 incidents were recorded in the last 90 days.
+| Type of control weakness | Records | Share of 245 |
+|---|---:|---|
+| ⚙️ Operating control weakness | 58 | `█████░░░░░░░░░░░░░░░` 24% |
+| 📐 Control design weakness | 25 | `██░░░░░░░░░░░░░░░░░░` 10% |
+| ↔️ Design vs operating gap | 15 | `█░░░░░░░░░░░░░░░░░░░` 6% |
+| ✅ No major gap identified | 147 | `████████████░░░░░░░░` 60% |
 
-### By country
+<p align="center"><img src="03_control_effectiveness.png" alt="Control effectiveness by country and process" width="100%"></p>
 
-| Country | Avg. inherent risk | Avg. residual risk | High risks | KRI breaches |
-|---|---:|---:|---:|---:|
-| Mexico | 12.73 | 5.73 | 4 | 5 |
-| Argentina | 10.16 | 4.55 | 2 | 5 |
-| Colombia | 10.20 | 4.52 | 1 | 4 |
-| Brazil | 8.49 | 3.65 | 0 | 0 |
-| Chile | 5.43 | 2.34 | 0 | 0 |
+---
 
-- Mexico has the highest residual risk and the most High records. Chile has the lowest.
-- All five countries are below the risk appetite line of 8 used in the country chart.
-- Brazil and Chile have no KRI breaches.
+### 🚨 Chapter 5 · Actions, incidents and escalation
 
-### By process
+142 records (58%) have at least one overdue action, 53 have recurring incidents and 14 exceed the KRI threshold of 3 incidents in 90 days. Two records were flagged for escalation.
 
-| Process | Avg. residual risk | Avg. control effectiveness | Overdue actions |
-|---|---:|---:|---:|
-| Third Party Management | 6.78 | 65.9% | 36 |
-| Information Security | 4.74 | 69.6% | 34 |
-| Compliance | 4.65 | 70.1% | 46 |
-| Technology | 3.92 | 71.7% | 26 |
-| Customer Operations | 3.55 | 72.7% | 31 |
-| Financial Operations | 2.87 | 72.3% | 18 |
-| Quality Assurance | 2.58 | 71.7% | 23 |
+```mermaid
+flowchart LR
+    A["245 risk records"] --> B["7 High"]
+    A --> C["14 KRI breaches"]
+    A --> D["142 with overdue actions"]
+    A --> E["53 with recurring incidents"]
+    B --> F["2 escalations"]
+    C --> F
+    D --> F
+```
 
-- Third Party Management has the highest residual risk and the lowest control effectiveness.
-- The highest country and process scores in the heatmap are Mexico – Third Party Management (9.6) and Argentina – Third Party Management (8.1). Both are above 8.
-- Compliance has the most overdue actions (46).
+<p align="center"><img src="04_risk_concentration.png" alt="Number of records per risk level in each country" width="70%"></p>
 
-### Controls and follow-up
+---
 
-- 58 records have operating effectiveness below 60%. These are the records with an operating control weakness, and their average operating effectiveness is 52.9%.
-- 25 records have a control design weakness, 15 have a gap between design and operation, and 147 show no major gap.
-- 142 records (58%) have at least one overdue action.
-- 53 records have recurring incidents.
+<details>
+<summary>📖 <b>How the numbers are calculated</b></summary>
 
-### Inherent risk matrix
+```mermaid
+flowchart LR
+    L["Likelihood 1–5"] --> I["Inherent risk = Likelihood × Impact"]
+    M["Impact 1–5"] --> I
+    DE["Design effectiveness · 40%"] --> CE["Control effectiveness"]
+    OE["Operating effectiveness · 60%"] --> CE
+    I --> R["Residual risk = Inherent × (1 − CE × 0.80)"]
+    CE --> R
+    R --> LV["Critical 15–25 · High 10–14 · Moderate 5–9 · Low below 5"]
+```
 
-The most common combination is likelihood 2 and impact 3, with 52 records. The next most common are likelihood 3 with impact 4 (31 records) and likelihood 3 with impact 3 (29 records).
+</details>
 
-## How the Code Helped
-
-- **Consistent scoring:** I wrote the formulas once, and the code applied them to all 245 records. This gave every record the same inherent score, control effectiveness, residual score and risk level.
-- **Combining signals:** The code checked each record for incidents, recurrence, overdue actions and KRI breaches at the same time. This is how I found the 14 KRI breaches and the 2 escalations without reviewing records one by one.
-- **Comparing countries and processes:** Grouping the data let me see quickly that Mexico and Third Party Management had the highest residual risk.
-- **Finding control problems:** The code labeled each record by type of control weakness, which showed that most weaknesses were in how controls are performed (58 records) rather than in how they are designed (25 records).
-- **Ready-to-use outputs:** The script produced the Excel files, the CSV register, the charts and the text report in one run, so the results are easy to read and share.
+> **Notes**
+> - The data is synthetic. Thresholds, weights, the risk appetite of 8 and the KRI threshold of 3 are assumptions defined for this project. They are not COSO or ISO 31000 values.
+> - In the tables above, "records with overdue actions" counts records. The Excel summaries count the total number of overdue actions, so the two figures differ.
+> - The images are in the repository root and in `readme_assets/`. The overview image is generated by `readme_assets/make_overview.py`.
