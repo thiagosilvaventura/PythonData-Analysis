@@ -1,0 +1,22 @@
+OPERATIONAL RISK MANAGEMENT REPORT
+=======================================================
+Total risks: 245
+Critical risks: 0
+High risks: 7
+KRI breaches: 14
+Escalations: 2
+Average inherent risk: 9.40
+Average residual risk: 4.16
+Modeled risk reduction: 55.78%
+
+MANAGEMENT RECOMMENDATIONS
+
+- HIGH EXPOSURE: 7 high-risk records require prioritized mitigation, assigned owners and time-bound corrective actions.
+
+- CONTROL EFFECTIVENESS: 58 records show operating effectiveness below 60%. Perform control testing, investigate execution failures and assess whether redesign or automation is necessary.
+
+- KRI MONITORING: 14 records breach the defined incident threshold. Investigate trends, validate thresholds and determine whether escalation is required.
+
+- ACTION GOVERNANCE: 142 risk records have at least one overdue action. Review ownership, deadlines, dependencies and evidence of completion.
+
+- RECURRENCE ANALYSIS: 53 records show recurring incidents. Prioritize root cause analysis and validate whether previous CAPAs were effective.
