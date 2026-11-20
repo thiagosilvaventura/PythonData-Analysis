@@ -156,3 +156,81 @@ The dataset is entirely synthetic, and the scoring thresholds, weights, and esca
 The model is intended to demonstrate the structure and application of an operational risk assessment methodology. Its calculations do not represent measured business performance or an official implementation of any regulatory framework.
 
 I used this project to apply Python to concepts related to operational risk, internal controls, incident monitoring, KRI assessment, and risk-based decision-making.
+
+## Output Files
+
+When I run the script, it saves the following files:
+
+| File | What it contains |
+|---|---|
+| `risk_register.csv` | The full list of 245 risk records with all scores, classifications, KRI status and escalation flag. |
+| `country_summary.xlsx` | Totals and averages for each country. |
+| `process_summary.xlsx` | Totals and averages for each process. |
+| `control_diagnostics.xlsx` | Count of records by type of control weakness. |
+| `executive_report.txt` | A short summary with the main numbers and management recommendations. |
+| `01_inherent_risk_matrix.png` | Likelihood vs impact matrix. |
+| `02_country_process_heatmap.png` | Average residual risk by country and process. |
+| `03_control_effectiveness.png` | Average control effectiveness by country and process. |
+| `04_risk_concentration.png` | Number of records per risk level in each country. |
+| `05_country_risk_comparison.png` | Average residual risk by country, compared to a risk appetite line of 8. |
+
+## Results
+
+All numbers below come from the synthetic dataset, so they only show how the model behaves. They are not real business results.
+
+### Overall
+
+- I assessed 245 risk records: 49 per country, 35 per process.
+- Average inherent risk was 9.40 and average residual risk was 4.16. The model estimates that controls reduce risk by 55.78%.
+- No record was classified as Critical. 7 records were classified as High.
+- 14 records breached the KRI threshold, and 2 required escalation.
+- 348 incidents were recorded in the last 90 days.
+
+### By country
+
+| Country | Avg. inherent risk | Avg. residual risk | High risks | KRI breaches |
+|---|---:|---:|---:|---:|
+| Mexico | 12.73 | 5.73 | 4 | 5 |
+| Argentina | 10.16 | 4.55 | 2 | 5 |
+| Colombia | 10.20 | 4.52 | 1 | 4 |
+| Brazil | 8.49 | 3.65 | 0 | 0 |
+| Chile | 5.43 | 2.34 | 0 | 0 |
+
+- Mexico has the highest residual risk and the most High records. Chile has the lowest.
+- All five countries are below the risk appetite line of 8 used in the country chart.
+- Brazil and Chile have no KRI breaches.
+
+### By process
+
+| Process | Avg. residual risk | Avg. control effectiveness | Overdue actions |
+|---|---:|---:|---:|
+| Third Party Management | 6.78 | 65.9% | 36 |
+| Information Security | 4.74 | 69.6% | 34 |
+| Compliance | 4.65 | 70.1% | 46 |
+| Technology | 3.92 | 71.7% | 26 |
+| Customer Operations | 3.55 | 72.7% | 31 |
+| Financial Operations | 2.87 | 72.3% | 18 |
+| Quality Assurance | 2.58 | 71.7% | 23 |
+
+- Third Party Management has the highest residual risk and the lowest control effectiveness.
+- The highest country and process scores in the heatmap are Mexico – Third Party Management (9.6) and Argentina – Third Party Management (8.1). Both are above 8.
+- Compliance has the most overdue actions (46).
+
+### Controls and follow-up
+
+- 58 records have operating effectiveness below 60%. These are the records with an operating control weakness, and their average operating effectiveness is 52.9%.
+- 25 records have a control design weakness, 15 have a gap between design and operation, and 147 show no major gap.
+- 142 records (58%) have at least one overdue action.
+- 53 records have recurring incidents.
+
+### Inherent risk matrix
+
+The most common combination is likelihood 2 and impact 3, with 52 records. The next most common are likelihood 3 with impact 4 (31 records) and likelihood 3 with impact 3 (29 records).
+
+## How the Code Helped
+
+- **Consistent scoring:** I wrote the formulas once, and the code applied them to all 245 records. This gave every record the same inherent score, control effectiveness, residual score and risk level.
+- **Combining signals:** The code checked each record for incidents, recurrence, overdue actions and KRI breaches at the same time. This is how I found the 14 KRI breaches and the 2 escalations without reviewing records one by one.
+- **Comparing countries and processes:** Grouping the data let me see quickly that Mexico and Third Party Management had the highest residual risk.
+- **Finding control problems:** The code labeled each record by type of control weakness, which showed that most weaknesses were in how controls are performed (58 records) rather than in how they are designed (25 records).
+- **Ready-to-use outputs:** The script produced the Excel files, the CSV register, the charts and the text report in one run, so the results are easy to read and share.
